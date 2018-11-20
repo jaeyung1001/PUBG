@@ -17,9 +17,6 @@ class PUBG:
                          'squad', 'squad-fpp']
 
     def Lifetime(self, user_name, game_mode):
-        game_mode_list = ['solo', 'solo-fpp',
-                         'duo', 'duo-fpp',
-                         'squad', 'squad-fpp']
         self.game_mode = game_mode
         if not self.game_mode in PUBG.game_mode_list:
             print("Invalid Game Mode!")
@@ -87,5 +84,8 @@ class PUBG:
             url = "https://api.pubg.com/shards/steam/players/%s/seasons/division.bro.official.pc-2018-01" % user_id
             r = requests.get(url, headers = PUBG.header)
             return r.json()['data']['attributes']['gameModeStats'][self.game_mode]
+<<<<<<< HEAD
 
     # def new_function(self): 
+=======
+>>>>>>> eeed677690b8a26fc80f69a48aba78c805e6f733
