@@ -17,9 +17,6 @@ class PUBG:
                          'squad', 'squad-fpp']
 
     def Lifetime(self, user_name, game_mode):
-        game_mode_list = ['solo', 'solo-fpp',
-                         'duo', 'duo-fpp',
-                         'squad', 'squad-fpp']
         self.game_mode = game_mode
         if not self.game_mode in PUBG.game_mode_list:
             print("Invalid Game Mode!")
