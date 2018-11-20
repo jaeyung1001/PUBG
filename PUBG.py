@@ -7,7 +7,7 @@ import pandas as pd
 class PUBG:
     def __init__(self, API_KEY):
         self.API_KEY = API_KEY
-        header = {
+        PUBG.header = {
             "Authorization": "Bearer " + self.API_KEY,
             "accept": "application/vnd.api+json"
         }
@@ -28,16 +28,16 @@ class PUBG:
         else:
             self.user_name = user_name
             url = "https://api.pubg.com/shards/steam/players?filter[playerNames]=" + self.user_name
-            r = requests.get(url, headers=header)
+            r = requests.get(url, headers=PUBG.header)
             user_id = r.json()['data'][0]['id']
             url = "https://api.pubg.com/shards/steam/players/"+ user_id +"/seasons/lifetime"
-            r = requests.get(url, headers=header)
+            r = requests.get(url, headers=PUBG.header)
             return r.json()['data']['attributes']['gameModeStats'][self.game_mode]
     
     def Players(self, user_name):
         self.user_name = user_name
         url = "https://api.pubg.com/shards/steam/players?filter[playerNames]=" + self.user_name
-        r = requests.get(url, headers=header)
+        r = requests.get(url, headers=PUBG.header)
         return r.json()
     
     def LeaderBoards(self, game_mode, sort_target='rank'):
@@ -57,7 +57,6 @@ class PUBG:
             for data in r.json()['included']:
                 attributes = data['attributes']
                 stats = attributes['stats']
-
                 leader_pd = leader_pd.append({'name':attributes['name'],
                                               'rank': attributes['rank'],
                                               'averagedamage': stats['averageDamage'],
@@ -68,13 +67,13 @@ class PUBG:
                                               'rankpoints': stats['rankPoints'],
                                               'winratio': stats['winRatio'],
                                               'wintimes': stats['wins']}, ignore_index=True)
-            sort_target = sort_target.lower()    
-	        if not sort_target == 'rank':
-	            return leader_pd.sort_values(by=[sort_target], ascending=False)
-	        else:
-	            return leader_pd.sort_values(by=[sort_target])
+            sort_target = sort_target.lower()
+            if not sort_target == 'rank':
+            	return leader_pd.sort_values(by=[sort_target], ascending=False)
+            else:
+            	return leader_pd.sort_values(by=[sort_target])
 
-	def season_stats(self, user_name, game_mode):
+    def season_stats(self, user_name, game_mode):
         self.user_name = user_name
         self.game_mode = game_mode.lower()
         if not self.game_mode in PUBG.game_mode_list:
@@ -87,4 +86,4 @@ class PUBG:
             user_id = r.json()['data'][0]['id']
             url = "https://api.pubg.com/shards/steam/players/%s/seasons/division.bro.official.pc-2018-01" % user_id
             r = requests.get(url, headers = PUBG.header)
-        return r.json()['data']['attributes']['gameModeStats'][self.game_mode]
+            return r.json()['data']['attributes']['gameModeStats'][self.game_mode]
