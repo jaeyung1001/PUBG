@@ -1,7 +1,7 @@
 # PUBG
 
 ### GET API KEY
-[PUBG API LINK](https://developer.pubg.com/) sign in and get your's API key
+[PUBG API LINK](https://developer.pubg.com/) sign in and get your's API key and get more information at **DOCUMENTATION**
 
 ![api](./img/api.PNG)
 
@@ -26,3 +26,10 @@
   
   - result<br>
   ![result](./img/leader_result.PNG)
+
+- Use user lifetime function<br>
+  - return type: dictionary<br>
+  ![lifetime](./img/life.PNG)
+  
+  - result<br>
+  ![result](./img/life_result.PNG)
