@@ -87,3 +87,5 @@ class PUBG:
             url = "https://api.pubg.com/shards/steam/players/%s/seasons/division.bro.official.pc-2018-01" % user_id
             r = requests.get(url, headers = PUBG.header)
             return r.json()['data']['attributes']['gameModeStats'][self.game_mode]
+
+    # def new_function(self): 
